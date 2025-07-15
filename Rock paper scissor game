@@ -1,0 +1,45 @@
+import random
+import tkinter as tk
+from tkinter import messagebox
+
+# Constants for choices
+CHOICES = ["Rock", "Paper", "Scissor"]
+
+# Game logic
+def play(user_choice):
+    computer_choice = random.randint(0, 2)
+
+    result = ""
+    if user_choice == computer_choice:
+        result = "It's a draw!"
+    elif (user_choice == 0 and computer_choice == 2) or \
+         (user_choice == 1 and computer_choice == 0) or \
+         (user_choice == 2 and computer_choice == 1):
+        result = "You win!"
+    else:
+        result = "You lose!"
+
+    # Show result in popup
+    messagebox.showinfo("Result",
+                        f"Your choice: {CHOICES[user_choice]}\n"
+                        f"Computer's choice: {CHOICES[computer_choice]}\n\n{result}")
+
+# GUI setup
+root = tk.Tk()
+root.title("Rock Paper Scissors")
+
+label = tk.Label(root, text="Choose Rock, Paper, or Scissor", font=("Arial", 14))
+label.pack(pady=10)
+
+# Buttons for choices
+btn_rock = tk.Button(root, text="Rock", width=20, command=lambda: play(0))
+btn_rock.pack(pady=5)
+
+btn_paper = tk.Button(root, text="Paper", width=20, command=lambda: play(1))
+btn_paper.pack(pady=5)
+
+btn_scissor = tk.Button(root, text="Scissor", width=20, command=lambda: play(2))
+btn_scissor.pack(pady=5)
+
+root.mainloop()
+
